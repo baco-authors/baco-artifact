@@ -36,6 +36,7 @@ Each benchmark is run using the docker ```run``` functionality. Note that when r
 ```shell
 # start taco run script with entrypoint and run experiments
 docker run -it taco
+```
 
 Collect the results using a different terminal
 ```shell
