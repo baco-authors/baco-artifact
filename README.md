@@ -7,6 +7,7 @@ This is a repo to build and test BaCO and to recreate the results in the paper B
 Begin with cloning the repository
 ```shell
 git clone https://github.com/baco-authors/baco-artifact
+cd baco-artifact
 ``` 
 Subsequently, the easiest way to build the three docker images is to run
 ```shell
