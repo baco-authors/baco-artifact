@@ -33,7 +33,18 @@ Each benchmark is run using the docker ```run``` functionality. Note that when r
 
 ### Running TACO
 
+```shell
+# start taco run script with entrypoint and run experiments
+docker run -it taco
 
+Collect the results using a different terminal
+```shell
+# get id of docker 
+docker ps
+
+# copy results 
+docker cp <docker_id>:/home/taco/build/experiments .  
+```
 
 ### Running RISE/ELEVATE
 
