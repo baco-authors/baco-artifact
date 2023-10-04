@@ -106,18 +106,8 @@ docker cp <docker_id>:/home/shine/artifact/results/rise results
 
 There are two plot scripts in the plot docker image. The first script plots the main results (Figure 5 and 7 and Figure 11 [app]). The second script plots the ablation graphs (Figures 8, 9, and 10). The plot scrips are run as 
 ```shell
-docker run -v "$(pwd)"/results:/app/results plot
+docker run -v "$(pwd)"/results:/app/results -v "$(pwd)"/plots:/app/plots plot
 ```
 This will plot the data you have in results on host.
 
 The generated plots will be called *bar_plot.pdf* (Fig. 5), *line_plot_small.pdf* (Fig. 7), *line_plot_large.pdf* (Fig. 11), *ablation_spmm_1* (Fig. 8), *ablation_spmm_2* (Fig. 9), and *ablation_rise_1* (Fig. 10).
-
-To then access the plots, do 
-```shell
-# get id of docker 
-docker ps
-
-# copy results 
-docker cp <docker_id>:/home/app/plots plots  
-```
-
