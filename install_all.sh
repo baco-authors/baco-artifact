@@ -6,3 +6,4 @@ docker build -t plot ./plotting
 
 mkdir plots
 mkdir results
+mkdir results/taco
