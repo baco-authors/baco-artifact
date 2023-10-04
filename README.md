@@ -37,16 +37,7 @@ Each benchmark is run using the docker ```run``` functionality. We bind the outp
 
 ```shell
 # start taco run script and run experiments
-docker run -it -v "$(pwd)"/results:/home/taco/build/experiments taco
-```
-
-Collect the results using a different terminal
-```shell
-# get id of docker 
-docker ps
-
-# copy results 
-docker cp <docker_id>:/home/taco/build/experiments results  
+docker run -it -v "$(pwd)"/results:/home/taco/build/experiments taco 1
 ```
 
 ### Running RISE/ELEVATE (2 human minutes + 10 compute-hours)
@@ -57,17 +48,8 @@ docker run --gpus all -it -v "$(pwd)"/results:/home/shine/artifact/results rise 
 
 # navigate to repository and run experiments 
 cd /home/shine
-./run_rise.sh 30
-./run_ablation.sh 30
-```
-
-Collect the results using a different terminal
-```shell
-# get id of docker 
-docker ps
-
-# copy results 
-docker cp <docker_id>:/home/shine/artifact/results/rise results  
+./run_rise.sh 1
+./run_ablation.sh 1
 ```
 
 ### Running RISE/ELEVATE - CPU version
@@ -89,17 +71,8 @@ docker run -it -v "$(pwd)"/results:/home/shine/artifact/results rise_cpu bash
 
 # navigate to repository and run experiments 
 cd /home/shine
-./run_rise.sh 30
-./run_ablation.sh 30
-```
-
-Collect the results using a different terminal
-```shell
-# get id of docker 
-docker ps
-
-# copy results 
-docker cp <docker_id>:/home/shine/artifact/results/rise results  
+./run_rise.sh 1
+./run_ablation.sh 1
 ```
 
 # Running the plot scripts (2 compute minutes)
