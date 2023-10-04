@@ -571,7 +571,7 @@ if __name__ == "__main__":
     labels = ["BaCO", "ATF with OpenTuner", "Ytopt", "Uniform Sampling", "CoT Sampling"]
 
     # TACO
-    methods = ["bayesian_optimization", "opentuner", "ytopt", "random_sampling", "embedding_random_sampling"]
+    methods = ["bayesian_optimization", "opentuner", "ytopt_ccs", "random_sampling", "embedding_random_sampling"]
 
     # spmm
     for matrix in ["scircuit", "cage12", "laminar\_duct3D"]:
