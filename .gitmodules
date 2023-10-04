@@ -1,0 +1,3 @@
+[submodule "rise_elevate/rise_elevate_cpu/docker-scala-opencl"]
+	path = rise_elevate/rise_elevate_cpu/docker-scala-opencl
+	url = https://github.com/michel-steuwer/docker-scala-opencl
