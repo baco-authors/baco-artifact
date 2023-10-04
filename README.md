@@ -102,7 +102,7 @@ docker ps
 docker cp <docker_id>:/home/shine/artifact/results/rise results  
 ```
 
-# Running the plot scripts
+# Running the plot scripts (2 compute minutes)
 
 There are two plot scripts in the plot docker image. The first script plots the main results (Figure 5 and 7 and Figure 11 [app]). The second script plots the ablation graphs (Figures 8, 9, and 10). The plot scrips are run as 
 ```shell
