@@ -57,7 +57,7 @@ docker cp <docker_id>:/home/shine/artifact/results/rise .
 ```
 
 ### Running RISE/ELEVATE - CPU version
-If no GPU is available, the benchmarks can be run using an OpenCL CPU runtime environment. However this can result in different results. 
+If no GPU is available, the benchmarks can be run using an OpenCL CPU runtime environment. However, this can result in different results. 
 
 Preparation 
 ```shell
