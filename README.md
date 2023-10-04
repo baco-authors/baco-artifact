@@ -20,7 +20,7 @@ TACO is built into a container named *taco*. In addition to installing BaCO and 
 RISE/ELEVATE is built into a container named *rise*. In the docker image RISE/ELEVATE, BaCO and an OpenCL runtime environment for Nvidia GPUs is set up. Alternatively, a version using a CPU-based runtime environment can be built. 
 
 ### Building the plotting script
-The plotting scripts in _plots_ are built into a container named *plot* that downloads and runs python 3.8.
+The plotting scripts in _plots_ are built into a container named *plot* that downloads and runs python 3.8. The plots are made with matplotlib and seaborn.
 
 
 ### Setting up the results and plots Volume
@@ -29,9 +29,9 @@ Thplot script makes use of a docker Volume to provide the results and extract pl
 # Running the benchmarks
 Running the complete set of experiments reported in the paper takes several hundred compute hours and as such, we have provided the option to run fewer repetitions to lessen the computational load. In the paper, each experiment is run 30 times, the trends we show in the paper are clearly seen with fewer samples as well. 
 
-Each benchmark is run using the docker ```run``` functionality. Note that when running the benchmarks, the output directory needs to be bound to the volume *baco_data* for the plot script to be able to access them.
+Each benchmark is run using the docker ```run``` functionality. 
 
-### Running TACO (2 human minutes + 10 compute-hour)
+### Running TACO (2 human minutes + 10 compute-hours)
 
 ```shell
 # start taco run script and run experiments
@@ -47,7 +47,7 @@ docker ps
 docker cp <docker_id>:/home/taco/build/experiments .  
 ```
 
-### Running RISE/ELEVATE (2 human minutes + 10 compute-hour)
+### Running RISE/ELEVATE (2 human minutes + 10 compute-hours)
 
 ```shell
 # start interactive bash session
