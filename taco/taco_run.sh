@@ -60,7 +60,7 @@ done
 for mat in facebook uber3 random; do
 	for i in {1..$NUM_ITER}; do
 		./bin/taco-taco_dse -mat $mat/$mat.tns -n 10 -c $i -m bayesian_optimization -o TTV
-		./bin/taco-taco_dse -mat $mat/$mat.tns -n 10 -c $i -m opentuner -o TTV
+		./bin/taco-taco_dse -mat $mat/$mat.tns -n 10 -c $i -m opentuner -o TTV -t ot
 		./bin/taco-taco_dse -mat $mat/$mat.tns -n 10 -c $i -m ytopt_ccs -o TTV
 		./bin/taco-taco_dse -mat $mat/$mat.tns -n 10 -c $i -m random_sampling -o TTV
 		./bin/taco-taco_dse -mat $mat/$mat.tns -n 10 -c $i -m embedding_random_sampling -o TTV
