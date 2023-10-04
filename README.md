@@ -31,7 +31,7 @@ Running the complete set of experiments reported in the paper takes several hund
 
 Each benchmark is run using the docker ```run``` functionality. Note that when running the benchmarks, the output directory needs to be bound to the volume *baco_data* for the plot script to be able to access them.
 
-### Running TACO
+### Running TACO (2 human minutes + 10 compute-hour)
 
 ```shell
 # start taco run script with entrypoint and run experiments
