@@ -24,7 +24,7 @@ The plotting scripts in _plots_ are built into a container named *plot* that dow
 
 
 ### Setting up the results and plots Volume
-This artifact makes use of a shared Volume between the three Docker images to access results files and save plots. This volume will be called *baco_data* and is set up as ```sudo docker volume create baco_data```.
+Thplot script makes use of a docker Volume to provide the results and extract plots. This volume will be called *baco_data* and is set up as ```sudo docker volume create baco_data```.
 
 # Running the benchmarks
 Running the complete set of experiments reported in the paper takes several hundred compute hours and as such, we have provided the option to run fewer repetitions to lessen the computational load. In the paper, each experiment is run 30 times, the trends we show in the paper are clearly seen with fewer samples as well. 
@@ -47,7 +47,7 @@ docker ps
 docker cp <docker_id>:/home/taco/build/experiments .  
 ```
 
-### Running RISE/ELEVATE
+### Running RISE/ELEVATE (2 human minutes + 10 compute-hour)
 
 ```shell
 # start interactive bash session
