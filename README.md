@@ -95,5 +95,5 @@ There are two plot scripts in the plot docker image. The first script plots the 
 The generated plots will be called *bar_plot.pdf* (Fig. 5), *line_plot_small.pdf* (Fig. 7), *line_plot_large.pdf* (Fig. 11), *ablation_spmm_1* (Fig. 8), *ablation_spmm_2* (Fig. 9), and *ablation_rise_1* (Fig. 10).
 
 To access the data from the container run
-```docker run --rm -v baco_data:/tmp_storage -v $(pwd)/output:/output ubuntu sh -c 'cp -r /tmp_storage /outout'```.
+```docker run --rm -v baco_data:/tmp_storage -v $(pwd)/output:/output ubuntu sh -c 'cp -r /tmp_storage /output'```.
 
