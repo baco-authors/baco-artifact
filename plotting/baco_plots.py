@@ -38,14 +38,14 @@ class Plot:
         self.data_folder = os.path.join(BASE_FOLDER, self.framework, self.benchmark)
 
         # Get the header names for different frameworks
-        if self.framework in ["taco/spmm", "taco/sddmm", "taco/spmv", "taco/ttv", "taco/mttkrp"]:
+        if self.framework in ["taco/SpMM", "taco/SDDMM", "taco/SpMV", "taco/TTV", "taco/MTTKRP"]:
             self.value_header = "compute_time"
             self.feasibility_header = None
-            if self.framework in ["taco/mttkrp"]:
+            if self.framework in ["taco/MTTKRP"]:
                 self.expert = None
                 self.default = None
             else:
-                if self.framework in ["taco/ttv"]:
+                if self.framework in ["taco/TTV"]:
                     exp_col, def_col = 3, 2
                 else:
                     exp_col, def_col = 2, 3
@@ -76,9 +76,9 @@ class Plot:
             raise Exception("incorrect framework")
         print(framework, benchmark)
 
-        if framework == "taco/ttv" and benchmark in ["facebook", "random"]:
+        if framework == "taco/TTV" and benchmark in ["facebook", "random"]:
             self.feasibility_header = "Valid"
-        if framework == "taco/ttv" and benchmark in ["uber3"]:
+        if framework == "taco/TTV" and benchmark in ["uber3"]:
             self.expert = None
             self.default = None
 
@@ -575,26 +575,26 @@ if __name__ == "__main__":
 
     # spmm
     for matrix in ["scircuit", "cage12", "laminar\_duct3D"]:
-        plots.append(Plot("taco/spmm", matrix, methods, 60, 7, shadows=False, cutoff=5))
+        plots.append(Plot("taco/SpMM", matrix, methods, 60, 7, shadows=False, cutoff=5))
 
     # sddmm
     for matrix in ["email-Enron", "ACTIVSg10K", "Goodwin\_040"]:
-        plots.append(Plot("taco/sddmm", matrix, methods, 60, 7, shadows=False, cutoff=1.7))
+        plots.append(Plot("taco/SDDMM", matrix, methods, 60, 7, shadows=False, cutoff=1.7))
 
     # mttkrp
     for matrix in ["uber", "nips", "chicago"]:
-        plots.append(Plot("taco/mttkrp", matrix, methods, 60, 7, shadows=False, cutoff=5))
+        plots.append(Plot("taco/MTTKRP", matrix, methods, 60, 7, shadows=False, cutoff=5))
 
     # TTV
     for matrix in ["facebook", "uber3", "random"]:
-        plots.append(Plot("taco/ttv", matrix, methods, 60, 8, shadows=False, cutoff=5))
+        plots.append(Plot("taco/TTV", matrix, methods, 60, 8, shadows=False, cutoff=5))
 
     # spmv
     matrices = ["laminar\_duct3D", "cage12", "filter3D"]
     for matrix in matrices:
-        plots.append(Plot("taco/spmv", matrix, methods, 60, 7, shadows=False, cutoff=3))
+        plots.append(Plot("taco/SpMV", matrix, methods, 60, 7, shadows=False, cutoff=3))
 
-    tmp_plot = Plot("taco/spmv", "random", methods, 60, 7, shadows=False, cutoff=3)
+    tmp_plot = Plot("taco/SpMV", "random", methods, 60, 7, shadows=False, cutoff=3)
 
     # rise
     methods = ["bolog_cot", "opentuner", "ytoptccs", "rs_cot", "rs_emb"]

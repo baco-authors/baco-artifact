@@ -1,7 +1,8 @@
 FROM ubuntu
+
 ENV PYTHONUNBUFFERED=1
 
-WORKDIR /app
+WORKDIR /app 
 
 RUN apt update
 
@@ -16,6 +17,7 @@ RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
 COPY . .
+RUN mkdir plots
 
-CMD ["./run.sh"]
+CMD ["./make_plots.sh"]
 
