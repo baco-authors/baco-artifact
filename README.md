@@ -17,7 +17,7 @@ Both benchmarks begin with building BaCO using pip and setuptools. The baselines
 TACO is built into a container named *taco*. In addition to installing BaCO and downloading and building TACO, the docker image will also download the required tensors needed for the experiments. 
 
 ### Building RISE/ELEVATE
-
+RISE/ELEVATE is built into a container named *rise*. In the docker image RISE/ELEVATE, BaCO and an OpenCL runtime environment for Nvidia GPUs is set up. Alternatively, a version using a CPU-based runtime environment can be built. 
 
 ### Building the plotting script
 The plotting scripts in _plots_ are built into a container named *plot* that downloads and runs python 3.8.
@@ -36,6 +36,57 @@ Each benchmark is run using the docker ```run``` functionality. Note that when r
 
 
 ### Running RISE/ELEVATE
+
+```shell
+# start interactive bash session
+docker run --gpus all -it rise bash
+
+# navigate to repository and run experiments 
+cd /home/shine
+./run_rise.sh 30
+./run_ablation.sh 30
+```
+
+Collect the results using a different terminal
+```shell
+# get id of docker 
+docker ps
+
+# copy results 
+docker cp <docker_id>:/home/shine/artifact/results/rise .  
+```
+
+### Running RISE/ELEVATE - CPU version
+If no GPU is available, the benchmarks can be run using an OpenCL CPU runtime environment. However this can result in different results. 
+
+Preparation 
+```shell
+# init submodules 
+git submodule update --init
+
+# build docker 
+docker build -t rise_cpu ./rise_elevate/rise_elevate_cpu
+```
+
+Run experiments 
+```shell
+# start interactive bash session
+docker run -it rise_cpu bash
+
+# navigate to repository and run experiments 
+cd /home/shine
+./run_rise.sh 30
+./run_ablation.sh 30
+```
+
+Collect the results using a different terminal
+```shell
+# get id of docker 
+docker ps
+
+# copy results 
+docker cp <docker_id>:/home/shine/artifact/results/rise .  
+```
 
 # Running the plot scripts
 
