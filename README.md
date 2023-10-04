@@ -34,7 +34,7 @@ Each benchmark is run using the docker ```run``` functionality. Note that when r
 ### Running TACO (2 human minutes + 10 compute-hour)
 
 ```shell
-# start taco run script with entrypoint and run experiments
+# start taco run script and run experiments
 docker run -it taco
 ```
 
