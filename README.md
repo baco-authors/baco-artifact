@@ -53,7 +53,7 @@ docker cp <docker_id>:/home/taco/build/experiments results
 
 ```shell
 # start interactive bash session
-docker run --gpus all -it "$(pwd)"/results:/home/shine/artifact/results/rise rise bash
+docker run --gpus all -it "$(pwd)"/results:/home/shine/artifact/results rise bash
 
 # navigate to repository and run experiments 
 cd /home/shine
