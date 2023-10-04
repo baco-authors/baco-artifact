@@ -53,7 +53,7 @@ docker cp <docker_id>:/home/taco/build/experiments results
 
 ```shell
 # start interactive bash session
-docker run --gpus all -it "$(pwd)"/results:/home/shine/artifact/results rise bash
+docker run --gpus all -it -v "$(pwd)"/results:/home/shine/artifact/results rise bash
 
 # navigate to repository and run experiments 
 cd /home/shine
@@ -85,7 +85,7 @@ docker build -t rise_cpu ./rise_elevate/rise_elevate_cpu
 Run experiments 
 ```shell
 # start interactive bash session
-docker run -it rise_cpu bash
+docker run -it -v "$(pwd)"/results:/home/shine/artifact/results rise_cpu bash
 
 # navigate to repository and run experiments 
 cd /home/shine
