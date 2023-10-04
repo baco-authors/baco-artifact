@@ -37,7 +37,7 @@ Each benchmark is run using the docker ```run``` functionality.
 
 ```shell
 # start taco run script and run experiments
-docker run -it taco
+docker run -it -v "$(pwd)"/results:/home/taco/build/experiments taco
 ```
 
 Collect the results using a different terminal
@@ -53,7 +53,7 @@ docker cp <docker_id>:/home/taco/build/experiments results
 
 ```shell
 # start interactive bash session
-docker run --gpus all -it rise bash
+docker run --gpus all -it "$(pwd)"/results:/home/shine/artifact/results/rise rise bash
 
 # navigate to repository and run experiments 
 cd /home/shine
