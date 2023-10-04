@@ -39,5 +39,10 @@ Each benchmark is run using the docker ```run``` functionality. Note that when r
 
 # Running the plot scripts
 
+There are two plot scripts in the plot docker image. The first script plots the main results (Figure 5 and 7 and Figure 11 in the appendix). The second script plots the ablation graphs (Figures 8,9, and 10). The plot scrips are run as ```docker run plot -v baco_data:/app/results```. This will make the plotting script both read data from and save the plots to the baco_data volume. 
 
+The generated plots will be called *bar_plot.pdf* (Fig. 5), *line_plot_small.pdf* (Fig. 7), *line_plot_large.pdf* (Fig. 11), *ablation_spmm_1* (Fig. 8), *ablation_spmm_2* (Fig. 9), and *ablation_rise_1* (Fig. 10).
+
+To access the data from the container run
+```docker run --rm -v baco_data:/tmp_storage -v $(pwd)/output:/output ubuntu sh -c 'cp -r /tmp_storage /outout'```.
 
