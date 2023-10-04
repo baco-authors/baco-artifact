@@ -31,7 +31,7 @@ The plotting scripts in _plots_ are built into a container named *plot* that dow
 # Running the benchmarks
 Running the complete set of experiments reported in the paper takes several hundred compute hours and as such, we have provided the option to run fewer repetitions to lessen the computational load. In the paper, each experiment is run 30 times, the trends we show in the paper are clearly seen with fewer samples as well. 
 
-Each benchmark is run using the docker ```run``` functionality. 
+Each benchmark is run using the docker ```run``` functionality. We bind the outputfolder of the benchmark to the host *results* folder to access the csv files outside the container. 
 
 ### Running TACO (2 human minutes + 10 compute-hours)
 
