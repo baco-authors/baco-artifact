@@ -57,7 +57,7 @@ RUN ls && cd .
 RUN cd /home/taco && mkdir build && \
   cd build && \
   cmake -DCMAKE_BUILD_TYPE=Release -DOPENMP=ON .. && \
-  make -j16 && \
+  make -j8 && \
   mv ../cpp_taco_* . && \
   cd ..
 
@@ -65,13 +65,13 @@ RUN cd /home/taco && mkdir build && \
 # If that's not the case, please adjust the path accordingly.
 
 # COPY download_frostt.sh 
-
 RUN apt-get update && apt-get install numactl wget -y
 ENV HYPERMAPPER_HOME=/home/baco
 RUN cd /home/taco && ls && chmod +x download_suitesparse.sh && chmod +x download_frostt.sh && chmod +x extract.sh
 RUN /home/taco/download_suitesparse.sh && /home/taco/download_frostt.sh && /home/taco/extract.sh 
 WORKDIR /home/taco
 COPY taco_run.sh build/
+RUN chmod +x build/taco_run.sh
 WORKDIR /home/taco/build
 ENTRYPOINT ["/home/taco/build/taco_run.sh"]
 

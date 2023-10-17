@@ -1,6 +1,6 @@
 #!/bin/bash
 
-NUM_ITER=1
+NUM_ITER=$1
 
 # ablation
 for mat in filter3D email-Enron amazon0312; do
