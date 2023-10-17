@@ -1,0 +1,83 @@
+GP_model: gpy
+allow_duplicate_samples: True
+application_name: cpp_taco_SpMM
+baco_mode: {'mode': 'client-server'}
+design_of_experiment: {'doe_type': 'random sampling', 'number_of_samples': 7, 'allow_repetitions': False}
+epsilon_greedy_threshold: 0
+input_parameters: {'chunk_size': {'parameter_default': 512, 'parameter_type': 'ordinal', 'values': [2, 4, 8, 16, 32, 64, 128, 256, 512], 'prior': 'uniform', 'prior_parameters': []}, 'omp_chunk_size': {'parameter_default': 256, 'parameter_type': 'ordinal', 'values': [1, 2, 4, 8, 16, 32, 64, 128, 256], 'prior': 'uniform', 'prior_parameters': []}, 'omp_num_threads': {'parameter_default': 32, 'parameter_type': 'ordinal', 'values': [1, 2, 4, 8, 16, 32], 'prior': 'uniform', 'prior_parameters': []}, 'omp_scheduling_type': {'parameter_default': 0, 'parameter_type': 'ordinal', 'values': [0, 1], 'prior': 'uniform', 'prior_parameters': []}, 'permutation': {'constraints': ['permutation_i0 < permutation_i3', 'permutation_i1 < permutation_i3', 'permutation_i0 < permutation_i2', 'permutation_i1 < permutation_i2', '(permutation_i3 < permutation_i2) | (permutation_i3 < permutation_i4)'], 'parameter_default': [0, 1, 2, 3, 4], 'parameter_type': 'permutation', 'parametrization': 'naive', 'values': [5], 'prior': 'uniform', 'prior_parameters': []}, 'unroll_factor': {'constraints': ['unroll_factor < chunk_size'], 'dependencies': ['chunk_size'], 'parameter_default': 512, 'parameter_type': 'ordinal', 'values': [2, 4, 8, 16, 32, 64, 128, 256, 512], 'prior': 'uniform', 'prior_parameters': []}}
+local_search_starting_points: 0
+log_file: /home/taco/build/experiments/SpMM/filter3D/bayesian_optimization/cpp_taco_SpMM_simple_bayesian_optimization/log_cpp_taco_SpMM_simple_{1..1}.log
+log_transform_output: False
+models: {'model': 'gaussian_process', 'bootstrap': True, 'max_features': 0.5, 'min_samples_split': 2, 'number_of_trees': 200, 'use_all_data_to_fit_mean': False, 'use_all_data_to_fit_variance': False}
+multistart_hyperparameter_optimization: False
+optimization_iterations: 53
+optimization_method: bayesian_optimization
+optimization_objectives: ['compute_time']
+output_data_file: experiments/SpMM/filter3D/bayesian_optimization/cpp_taco_SpMM_simple_bayesian_optimization/cpp_taco_SpMM_simple_bayesian_optimization{1..1}_output_data.csv
+run_directory: /home/taco/build
+acquisition_function: EI
+acquisition_function_optimizer: local_search
+evolution_crossover: False
+evolution_generations: 150
+evolution_population_size: 50
+exploration_augmentation: 0.0001
+feasible_output: {'false_value': 'False', 'name': 'Valid', 'true_value': 'True', 'enable_feasible_predictor': False, 'feasibility_threshold': 0.1}
+lengthscale_prior: {'name': 'none', 'parameters': [1.3, 0.1]}
+local_search_from_best: True
+local_search_improvement_threshold: 0
+local_search_random_points: 30000
+local_search_step_size: 0.03
+log_acq_value: False
+model_good_quantile: 0.05
+model_weight: 10
+hyperparameter_optimization_iterations: 5
+mutation_rate: 1
+naive_cot_rs: False
+noise: True
+noise_prior: {'name': 'none'}
+normalize_inputs: True
+number_of_repetitions: 1
+objective_value_target: -9999
+outputscale_prior: {'name': 'none'}
+predict_noiseless: True
+prior_estimation_file: samples.csv
+prior_estimation_quantile: 0.1
+prior_floor: 1e-06
+prior_limit_estimation_points: 10000
+regularize_evolution: False
+reoptimise_hyperparameters_interval: 1
+resume_optimization: False
+resume_optimization_file: output_samples.csv
+reuse_gp_hyperparameters: False
+standardize_objectives: True
+time_budget: -1
+timestamp: Timestamp
+use_STGP: True
+
+time to build tree: 0.0037178993225097656
+number of leaves: 36
+time to calculate probabilities: 0.0010256767272949219
+time to build tree: 0.000133514404296875
+number of leaves: 9
+time to calculate probabilities: 0.00016045570373535156
+time to build tree: 5.745887756347656e-05
+number of leaves: 6
+time to calculate probabilities: 0.00011372566223144531
+time to build tree: 3.910064697265625e-05
+number of leaves: 2
+time to calculate probabilities: 5.316734313964844e-05
+time to build tree: 0.0016252994537353516
+number of leaves: 12
+time to calculate probabilities: 0.0002982616424560547
+Running on client-server mode.
+Communication protocol: sending message...
+Request 7
+chunk_size,omp_chunk_size,omp_num_threads,omp_scheduling_type,permutation,unroll_factor
+512,256,32,0,(0, 1, 2, 3, 4),512
+128,8,32,1,(0, 1, 2, 3, 4),16
+128,64,32,0,(1, 0, 4, 3, 2),8
+128,64,4,0,(1, 0, 2, 3, 4),64
+128,1,32,1,(0, 1, 4, 3, 2),32
+512,64,1,0,(1, 0, 4, 3, 2),128
+64,32,8,1,(4, 0, 1, 3, 2),16
+Communication protocol: receiving message....
