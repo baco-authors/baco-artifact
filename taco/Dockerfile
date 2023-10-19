@@ -44,7 +44,8 @@ RUN \
 # install baselines
 RUN \
   cd /home/baco && \
-  bash install_baselines.sh && cd /home
+  bash install_baselines.sh && cd /home && \
+  pip3 install scikit-learn==1.0.2
 
 # set environment variables
 ENV PYTHONPATH="/home/baco:/home/baco/extra_packages/CCS/bindings/python/"
@@ -70,6 +71,8 @@ ENV HYPERMAPPER_HOME=/home/baco
 RUN cd /home/taco && ls && chmod +x download_suitesparse.sh && chmod +x download_frostt.sh && chmod +x extract.sh
 RUN /home/taco/download_suitesparse.sh && /home/taco/download_frostt.sh && /home/taco/extract.sh 
 WORKDIR /home/taco
+
+ENV OMP_PROC_BIND=true
 COPY taco_run.sh build/
 RUN chmod +x build/taco_run.sh
 WORKDIR /home/taco/build
