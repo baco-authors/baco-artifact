@@ -55,6 +55,9 @@ RUN \
   apt-get install -y pip && \
   pip install --upgrade pip && \
   pip install -e . 
+  
+# downgrade for compatibility
+RUN pip3 install numpy==1.24.4 && pip3 install scipy==1.10.1
 
 # install baselines
 RUN \
@@ -74,4 +77,9 @@ RUN \
     sbt compile && \
     git checkout autotuning_benchmarks_artifact && \
     ./setup.sh
+    
+    
+COPY rise_utility.sh /home 
+RUN cd /home && chmod +x rise_utility.sh
+# ENTRYPOINT ["/home/rise_utility.sh"]
 
