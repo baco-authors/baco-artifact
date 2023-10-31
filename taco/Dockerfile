@@ -70,7 +70,7 @@ RUN apt-get update && apt-get install numactl wget -y
 ENV HYPERMAPPER_HOME=/home/baco
 RUN cd /home/taco && ls && chmod +x download_suitesparse.sh && chmod +x download_frostt.sh && chmod +x extract.sh
 RUN /home/taco/download_suitesparse.sh && /home/taco/download_frostt.sh && /home/taco/extract.sh
-RUN cd /home/data/suitesparse/ && wget https://sparse.tamu.edu/MM/SNAP/amazon0312.tar.gz && cd -
+RUN cd /home/data/suitesparse/ && wget https://sparse.tamu.edu/MM/SNAP/amazon0312.tar.gz && tar -xzf amazon0312.tar.gz && cd -
 WORKDIR /home/taco
 
 ENV OMP_PROC_BIND=true
