@@ -37,6 +37,10 @@ class Plot:
         self.times = [int(math.ceil((i + 1) * self.evals / 3)) for i in range(3)]
         self.data_folder = os.path.join(BASE_FOLDER, self.framework, self.benchmark)
 
+        if not os.path.isdir(self.data_folder):
+            self.stat_df = pd.DataFrame()
+            return None
+
         # Get the header names for different frameworks
         if self.framework in ["taco/SpMM", "taco/SDDMM", "taco/SpMV", "taco/TTV", "taco/MTTKRP"]:
             self.value_header = "compute_time"
@@ -90,10 +94,10 @@ class Plot:
             method_folder = os.path.join(self.data_folder, method)
             if not os.path.isdir(method_folder):
                 continue
-            if len([x for x in os.listdir(method_folder)]) == 1:
+            if len([x for x in os.listdir(method_folder)]) == 1 and os.path.isdir(os.path.join(method_folder, os.listdir(method_folder)[0])):
                 method_folder = os.path.join(method_folder, os.listdir(method_folder)[0])
 
-            files = [f for f in os.listdir(os.path.join(method_folder)) if ".csv" in f]
+            files = [f for f in os.listdir(method_folder) if ".csv" in f]
             if not files:
                 continue
             mdf = pd.DataFrame()
@@ -177,7 +181,7 @@ def small_line_plots(
     figure_break_tops = [figure_break_bots[i] + break_height for i in range(n_rows)]
 
     left = 0.09
-    hl = 0.25
+    hl = 0.2
     hs = 0.04
 
     axs = {}
@@ -281,7 +285,7 @@ def small_line_plots(
         facecolor="white",
         handlelength=2.7,
     )
-    for legobj in leg.legendHandles:
+    for legobj in leg.legend_handles:
         legobj.set_linewidth(4.0)
 
     fig_name = f"plots/line_plot_small.pdf"
@@ -423,7 +427,7 @@ def large_line_plots(
         facecolor="white",
         handlelength=2.7,
     )
-    for legobj in leg.legendHandles:
+    for legobj in leg.legend_handles:
         legobj.set_linewidth(4.0)
 
     fig_name = f"plots/line_plot_large.pdf"
@@ -522,7 +526,7 @@ def bar_plot(plots):
         geo_df.columns = ["Method", "Speedup over Expert", "Speedup over Default", "Evaluations"]
         for a, b in zip(["33\%", "66\%", "100\%"], ["tiny", "small", "full"]):
             geo_df.replace(to_replace=a, value=b, inplace=True)
-        sns.barplot(data=geo_df, x="Evaluations", hue="Method", y="Speedup over Expert", ax=ax, ci="sd", errwidth=.5, errcolor="grey")
+        sns.barplot(data=geo_df, x="Evaluations", hue="Method", y="Speedup over Expert", ax=ax, errorbar='sd', err_kws={'color': 'grey', 'linewidth': 0.5})
         ax.axhline(1, linestyle="dashed", color="grey", linewidth=.8)
         yticks = ax.get_yticks()
         ax.set_yticks(yticks)

@@ -36,7 +36,8 @@ def get_data(
         framework_folder = key["Framework"]
         benchmark_folder = key["Operation"]
         data_folder = os.path.join(BASE_FOLDER, framework_folder, benchmark_folder)
-
+        if not os.path.isdir(data_folder):
+    	    return {}
         # Get the header names for different frameworks
         if framework_folder in ["taco/spmm", "taco/sddmm", "ablation/spmm", "ablation/sddmm", "ablation/RF", "ablation/tmp", "ablation/permutation"]:
             value_header = "compute_time"
@@ -52,8 +53,11 @@ def get_data(
         for method in methods:
             if "base" in method:
                 feasibility_header = None
+                
             method_folder = os.path.join(data_folder, method)
-            files = [f for f in os.listdir(os.path.join(method_folder)) if ".csv" in f]
+            if not os.path.isdir(method_folder):
+            	continue
+            files = [f for f in os.listdir(method_folder) if ".csv" in f]
             mdf = pd.DataFrame()
             for i, f in enumerate(files):
                 file_data = pd.read_csv(os.path.join(method_folder, f))
@@ -133,6 +137,8 @@ def make_geo(
         op_name = "Matrix"
     merged_df = pd.DataFrame()
     for key in key_set:
+        if not key in data:
+    	    continue
         val_df = data[key]["Values_df"]
         stat_df = data[key]["Statistics_df"]
         if time_points[0] <= 1:
@@ -156,6 +162,10 @@ def make_geo(
     for a, b in zip(user_specified_methods, labels):
         merged_df.replace(to_replace=a, value=b, inplace=True)
 
+    if merged_df.empty:
+        print("WARNING NO DATA for one ablation plot")
+        return
+
     # Add geo Mean
     for t in merged_df.Evaluations.unique():
         for m in merged_df["Method"].unique():
@@ -174,7 +184,7 @@ def make_geo(
     fig.suptitle("Impact of Hidden Constraints")
     palette = sns.color_palette()
     colors = ([3, 4, 9] if plot_name == "rise_abl" else [0, 6, 2, 7])
-    sns.barplot(data=merged_df_m, x="Number of Configuration Evaluations", hue="Method", y="Avg. Performance relative to Expert", ax=ax, ci="sd", errwidth=.5, errcolor="grey", palette=[palette[i] for i in colors])  # ])
+    sns.barplot(data=merged_df_m, x="Number of Configuration Evaluations", hue="Method", y="Avg. Performance relative to Expert", ax=ax, errorbar='sd', err_kws={'color': 'grey', 'linewidth': 0.5}, palette=[palette[i] for i in colors])  # ])
     ax.axhline(1, linestyle="dashed", color="grey", linewidth=.8)
     yticks = ax.get_yticks()
     ax.set_yticks(yticks)
@@ -214,6 +224,8 @@ def make_geo2(
         op_name = "Matrix"
     merged_df = pd.DataFrame()
     for key in key_set:
+        if not key in data:
+    	    continue
         val_df = data[key]["Values_df"]
         stat_df = data[key]["Statistics_df"]
         if time_points[0] <= 1:
@@ -233,6 +245,11 @@ def make_geo2(
         val_df["imp_remb"] = val_df.apply(lambda row: np.nan, axis=1)
         val_df[op_name] = [key[1]] * val_df.shape[0]
         merged_df = merged_df.append(val_df)
+
+    if merged_df.empty:
+        print("WARNING NO DATA for one ablation plot")
+        return
+
 
     for a, b in zip(user_specified_methods, labels):
         merged_df.replace(to_replace=a, value=b, inplace=True)
@@ -254,7 +271,7 @@ def make_geo2(
     merged_df_m = merged_df[merged_df[op_name] == "GeoMean"]
     fig.suptitle("Ablation analysis on SpMM")
     palette2 = sns.color_palette() + sns.color_palette('dark')
-    sns.barplot(data=merged_df_m, x="Number of Configuration Evaluations", hue="Method", y="Avg. Performance relative to Expert", ax=ax, ci="sd", errwidth=.5, errcolor="grey", palette=[palette2[i] for i in [0, 8, 9, 13, 14, 16, 17, 18]])
+    sns.barplot(data=merged_df_m, x="Number of Configuration Evaluations", hue="Method", y="Avg. Performance relative to Expert", ax=ax, errorbar='sd', err_kws={'color': 'grey', 'linewidth': 0.5}, palette=[palette2[i] for i in [0, 8, 9, 13, 14, 16, 17, 18]])
     ax.axhline(1, linestyle="dashed", color="grey", linewidth=.8)
     yticks = ax.get_yticks()
     ax.set_yticks(yticks)
