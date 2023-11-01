@@ -47,9 +47,6 @@ RUN \
   pip install --upgrade pip && \
   pip install -e .
 
-# downgrade for compatibility
-RUN pip3 install numpy==1.24.4 && pip3 install scipy==1.10.1
-
 # install baselines
 RUN \
 	cd /home/baco && \
@@ -69,7 +66,9 @@ RUN \
     git checkout autotuning_benchmarks_artifact && \
     ./setup.sh
 
-RUN cd .
+# downgrade for compatibility
+RUN pip3 install numpy==1.24.4 && pip3 install scipy==1.10.1
+
 COPY rise_utility.sh /home 
 RUN cd /home && chmod +x rise_utility.sh
 # ENTRYPOINT ["/home/rise_utility.sh"]
